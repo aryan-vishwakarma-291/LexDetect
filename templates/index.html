@@ -101,6 +101,13 @@ placeholder="Paste your document text here..."></textarea>
 <div class="result">
 Prediction: {{ result }}
 </div>
+<div class="result-box">
+    <h3>{{ result }}</h3>
+
+    {% if confidence %}
+    <p><strong>Confidence:</strong> {{ confidence }}%</p>
+    {% endif %}
+</div>
 {% endif %}
 
 </div>
