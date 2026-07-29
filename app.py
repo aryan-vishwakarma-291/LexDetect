@@ -96,7 +96,8 @@ def home():
             prediction_result = "Legal Document"
         else:
             prediction_result = "Non-Legal Document"
-
+            
+    confidence = float(confidence)
     return render_template(
         "index.html",
         result=prediction_result,
