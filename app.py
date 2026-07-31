@@ -11,11 +11,11 @@ from reportlab.lib.styles import getSampleStyleSheet
 from datetime import datetime
 import os
 from flask import send_file
-
+from database import init_db, save_prediction, get_history
 
 # Create Flask app FIRST
 app = Flask(__name__) 
-
+init_db()  # Initialize the database
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 # Load model
@@ -95,6 +95,16 @@ def download_report():
         as_attachment=True
     )
 
+@app.route("/history")
+def history():
+
+    history_data = get_history()
+
+    return render_template(
+        "history.html",
+        history=history_data
+    )
+
 @app.route("/", methods=["GET", "POST"])
 def home():
 
@@ -142,17 +152,18 @@ def home():
             prediction_result = "Legal Document"
         else:
             prediction_result = "Non-Legal Document"
-            
-    if uploaded_file:
-        uploaded_filename = uploaded_file.filename
-    else:
-        uploaded_filename = user_text[:30] + "..." if len(user_text) > 30 else user_text
-    report_path = generate_report(
-    uploaded_filename,
-    prediction_result,
-    confidence,
-    text_to_check
-    )
+        
+        if uploaded_file:
+            uploaded_filename = uploaded_file.filename
+        else:
+            uploaded_filename = user_text[:30] + "..." if len(user_text) > 30 else user_text
+        report_path = generate_report(
+        uploaded_filename,
+        prediction_result,
+        confidence,
+        text_to_check
+        )
+        save_prediction(uploaded_filename, prediction_result, confidence)
     confidence = confidence
 
     return render_template(
