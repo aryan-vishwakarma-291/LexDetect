@@ -83,6 +83,7 @@
 
 <div class="main-card">
 
+
     <h1 class="text-center title mb-4">
         🤖 AI Legal Document Detector
     </h1>
@@ -203,8 +204,32 @@
 
 
     {% endif %}
+   
+   
+{% if extracted_text %}
 
+    <div class="card mt-4 shadow-sm">
 
+    <div class="card-header bg-primary text-white">
+        👁️ OCR / Extracted Text Preview
+    </div>
+
+    <div class="card-body">
+
+        <textarea
+        class="form-control"
+        rows="10"
+        readonly>{{ extracted_text[:1000] }}</textarea>
+
+    </div>
+    
+
+</div>
+
+{% endif %}
+<a href="/download-report" class="btn btn-danger mt-3">
+    📄 Download PDF Report
+</a>
 
 </div>
 <script>

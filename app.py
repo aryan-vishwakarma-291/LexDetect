@@ -6,6 +6,12 @@ import pytesseract
 from PIL import Image
 import pdfplumber
 import docx
+from reportlab.platypus import SimpleDocTemplate, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
+from datetime import datetime
+import os
+from flask import send_file
+
 
 # Create Flask app FIRST
 app = Flask(__name__) 
@@ -20,6 +26,39 @@ with open("model/model.pkl", "rb") as f:
 with open("model/vectorizer.pkl", "rb") as f:
     vectorizer = pickle.load(f)
 
+# generate PDF
+def generate_report(filename, prediction, confidence, text):
+
+    os.makedirs("reports", exist_ok=True)
+
+    pdf_path = os.path.join("reports", "prediction_report.pdf")
+
+    doc = SimpleDocTemplate(pdf_path)
+
+    styles = getSampleStyleSheet()
+
+    story = []
+
+    story.append(Paragraph("<b>AI Legal Document Detector</b>", styles["Title"]))
+
+    story.append(Paragraph(f"<b>Prediction:</b> {prediction}", styles["Normal"]))
+
+    story.append(Paragraph(f"<b>Confidence:</b> {confidence:.2f}%", styles["Normal"]))
+
+    story.append(Paragraph(f"<b>File:</b> {filename}", styles["Normal"]))
+
+    story.append(Paragraph(
+        f"<b>Date:</b> {datetime.now().strftime('%d-%m-%Y %H:%M:%S')}",
+        styles["Normal"]
+    ))
+
+    story.append(Paragraph("<br/><b>Extracted Text:</b>", styles["Heading2"]))
+
+    story.append(Paragraph(text[:3000], styles["BodyText"]))
+
+    doc.build(story)
+
+    return pdf_path
 # Cleaning function
 def clean_text(text):
     text = text.lower()
@@ -48,6 +87,13 @@ def extract_text_from_file(file_path):
 
     else:
         return ""
+
+@app.route("/download-report")
+def download_report():
+    return send_file(
+        "reports/prediction_report.pdf",
+        as_attachment=True
+    )
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -97,7 +143,18 @@ def home():
         else:
             prediction_result = "Non-Legal Document"
             
-    confidence = float(confidence)
+    if uploaded_file:
+        uploaded_filename = uploaded_file.filename
+    else:
+        uploaded_filename = user_text[:30] + "..." if len(user_text) > 30 else user_text
+    report_path = generate_report(
+    uploaded_filename,
+    prediction_result,
+    confidence,
+    text_to_check
+    )
+    confidence = confidence
+
     return render_template(
         "index.html",
         result=prediction_result,
