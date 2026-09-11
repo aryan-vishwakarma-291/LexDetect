@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request
 import pickle
 import string
 import os
@@ -12,7 +12,13 @@ from datetime import datetime
 import os
 from flask import send_file
 from database import init_db, save_prediction, get_history
-
+from database import (
+    init_db,
+    save_prediction,
+    get_history,
+    delete_prediction,
+    clear_history
+)
 # Create Flask app FIRST
 app = Flask(__name__) 
 init_db()  # Initialize the database
@@ -104,6 +110,20 @@ def history():
         "history.html",
         history=history_data
     )
+
+@app.route("/delete/<int:prediction_id>")
+def delete(prediction_id):
+
+    delete_prediction(prediction_id)
+
+    return redirect("/history")
+
+@app.route("/clear-history")
+def clear_history_route():
+
+    clear_history()
+
+    return redirect("/history")
 
 @app.route("/", methods=["GET", "POST"])
 def home():

@@ -66,3 +66,30 @@ def get_history():
     conn.close()
 
     return rows
+
+def delete_prediction(prediction_id):
+
+    conn = sqlite3.connect("predictions.db")
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "DELETE FROM history WHERE id = ?",
+        (prediction_id,)
+    )
+
+    conn.commit()
+
+    conn.close()
+
+def clear_history():
+
+    conn = sqlite3.connect("predictions.db")
+
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM history")
+
+    conn.commit()
+
+    conn.close()

@@ -20,65 +20,180 @@
     <a href="/" class="btn btn-primary mb-3">
         ⬅ Back
     </a>
+    <a href="/clear-history"
+        class="btn btn-danger mb-3"
+        onclick="return confirm('Are you sure you want to clear all prediction history?')">
+            🗑️ Clear All History
+    </a>
 
-    <table class="table table-bordered table-hover table-striped">
+    <!-- Search and Filter -->
 
-        <thead class="table-dark">
+<div class="row mb-4">
 
-            <tr>
+    <div class="col-md-7">
 
-                <th>ID</th>
+        <input
+            type="text"
+            id="searchInput"
+            class="form-control"
+            placeholder="🔍 Search by filename..."
+            onkeyup="filterHistory()">
 
-                <th>File</th>
+    </div>
 
-                <th>Prediction</th>
+    <div class="col-md-5">
 
-                <th>Confidence</th>
+        <select
+            id="predictionFilter"
+            class="form-select"
+            onchange="filterHistory()">
 
-                <th>Date</th>
+            <option value="all">All Predictions</option>
+            <option value="Legal Document">Legal Documents</option>
+            <option value="Non-Legal Document">Non-Legal Documents</option>
 
-            </tr>
+        </select>
 
-        </thead>
-
-        <tbody>
-
-        {% for row in history %}
-
-            <tr>
-
-                <td>{{ row["id"] }}</td>
-
-                <td>{{ row["filename"] }}</td>
-
-                <td>
-
-                {% if row["prediction"] == "Legal Document" %}
-
-                    ✅ {{ row["prediction"] }}
-
-                {% else %}
-
-                    ❌ {{ row["prediction"] }}
-
-                {% endif %}
-
-                </td>
-
-                <td>{{ "%.2f"|format(row["confidence"]) }}%</td>
-
-                <td>{{ row["created_at"] }}</td>
-
-            </tr>
-
-        {% endfor %}
-
-        </tbody>
-
-    </table>
+    </div>
 
 </div>
 
+
+<!-- History Table -->
+
+<div class="table-responsive">
+
+<table class="table table-bordered table-hover table-striped" id="historyTable">
+
+    <thead class="table-dark">
+
+        <tr>
+
+            <th>ID</th>
+            <th>File</th>
+            <th>Prediction</th>
+            <th>Confidence</th>
+            <th>Date</th>
+            <th>Action</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    {% for row in history %}
+
+        <tr>
+
+            <td>{{ row["id"] }}</td>
+
+            <td class="filename">
+                {{ row["filename"] }}
+            </td>
+
+           <td class="prediction" data-prediction="{{ row['prediction'] }}">
+
+                {% if row["prediction"] == "Legal Document" %}
+
+                    <span class="badge bg-success">
+                        ✅ Legal Document
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-danger">
+                        ❌ Non-Legal Document
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+            <td>
+                {{ "%.2f"|format(row["confidence"]) }}%
+            </td>
+
+            <td>
+                {{ row["created_at"] }}
+            </td>
+
+            <td>
+
+                <a
+                    href="/delete/{{ row['id'] }}"
+                    class="btn btn-sm btn-danger"
+                    onclick="return confirm('Delete this prediction?')">
+
+                    🗑️ Delete
+
+                </a>
+
+            </td>
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+</div>
+
+</div>
+<script>
+
+function filterHistory() {
+
+    const search = document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const filter = document
+        .getElementById("predictionFilter")
+        .value;
+
+    const rows = document.querySelectorAll(
+        "#historyTable tbody tr"
+    );
+
+    rows.forEach(row => {
+
+        const filename = row
+            .querySelector(".filename")
+            .textContent
+            .toLowerCase();
+
+        const prediction = row
+            .querySelector(".prediction")
+            .getAttribute("data-prediction");
+
+
+        const matchesSearch =
+            filename.includes(search);
+
+        const matchesFilter =
+            filter === "all" ||
+            prediction === filter;
+
+
+        if (matchesSearch && matchesFilter) {
+
+            row.style.display = "";
+
+        } else {
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
 </body>
 
 </html>
