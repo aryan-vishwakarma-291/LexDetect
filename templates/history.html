@@ -20,6 +20,7 @@
     <a href="/" class="btn btn-primary mb-3">
         ⬅ Back
     </a>
+<<<<<<< HEAD
     <a href="/clear-history"
         class="btn btn-danger mb-3"
         onclick="return confirm('Are you sure you want to clear all prediction history?')">
@@ -194,6 +195,67 @@ function filterHistory() {
 }
 
 </script>
+=======
+
+    <table class="table table-bordered table-hover table-striped">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>File</th>
+
+                <th>Prediction</th>
+
+                <th>Confidence</th>
+
+                <th>Date</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for row in history %}
+
+            <tr>
+
+                <td>{{ row["id"] }}</td>
+
+                <td>{{ row["filename"] }}</td>
+
+                <td>
+
+                {% if row["prediction"] == "Legal Document" %}
+
+                    ✅ {{ row["prediction"] }}
+
+                {% else %}
+
+                    ❌ {{ row["prediction"] }}
+
+                {% endif %}
+
+                </td>
+
+                <td>{{ "%.2f"|format(row["confidence"]) }}%</td>
+
+                <td>{{ row["created_at"] }}</td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+>>>>>>> add86cd73231bfd445188dce7d4b6c2f454937c8
 </body>
 
 </html>

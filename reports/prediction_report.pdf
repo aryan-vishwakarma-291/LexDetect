@@ -32,7 +32,11 @@ endobj
 endobj
 6 0 obj
 <<
+<<<<<<< HEAD
 /Author (\(anonymous\)) /CreationDate (D:20260911195854+05'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20260911195854+05'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+=======
+/Author (\(anonymous\)) /CreationDate (D:20260801004023+05'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20260801004023+05'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+>>>>>>> add86cd73231bfd445188dce7d4b6c2f454937c8
   /Subject (\(unspecified\)) /Title (\(anonymous\)) /Trapped /False
 >>
 endobj
@@ -43,10 +47,17 @@ endobj
 endobj
 8 0 obj
 <<
+<<<<<<< HEAD
 /Filter [ /ASCII85Decode /FlateDecode ] /Length 384
 >>
 stream
 Gat=fd7V;1'Sc)J'`X.hKm#IZ[jJ_.D?F='6=-=\=fnb7WtG(#P1HV_D9?bA76(+XmggR\E)8Jf%Ep\!.fp%@%4FqKkV\Zpm9%+ja<\'U&h0*!WS*;c@ue!.F8Z[bAdVgRZk=K!U4`e<8gQl'JjU?1DXXj=A\Q.#RCCm.*Xh;9nZKQ[IY#4!4LhWFm"mn(:_D`+.K]bb$pp)!n%jXs5o.jXCQ$@1au-L8f@B;4,!<@^*i^6>N]I_Wk]#^R9i]icf\[1l,g"Qd3UTkG$b<<QH\>KEY>Mm2.H):Rc*MKGZ[A0HaC"$-#bNO-.Mc8_6#&<?ZUoHY5<`AfkK?YM3oGe3BY!kSDS.QomG@RqVb#h9s5"@&g@X3rIlo144'17^2#~>endstream
+=======
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 389
+>>
+stream
+Gat=fd7V;1'Sc)J'`X.hKm#IZ=ju1egOV&s6!g4[=fJK^WtFLK93S5o[jepL(ErUhmluK@_*S%L%BrZr/.!Sp2P<$eTiT5LgTf]I+d#<)MPNolFMi:G+*2N=>H!T*5@^VrPGJ7N+!lRN9%/Se8oU^A_<jBdVCK$qXF>"[l];us['SRGe.^=@_U4!@Yr,bc:_D/p.O,&S%=F;gi5*+I5o.:HB?FDig:$Sof@THZ"F..f3*&*X*H`L9d,E9YS%:GY2SU8q,a.0P*-[^G(NPl8p'@omd@ddf>JXH)Di6PR7:TZL3lpAKLTGGb*&rXWL4Y=$31n6=/uE:Oe'ffaq!sUjO8(mnaS2hfZnj"mft5)_'M86$kBl2iS"Y2ucaAA<"'7t;c2~>endstream
+>>>>>>> add86cd73231bfd445188dce7d4b6c2f454937c8
 endobj
 xref
 0 9
@@ -62,7 +73,11 @@ xref
 trailer
 <<
 /ID 
+<<<<<<< HEAD
 [<5b7fb369b8d321aa2c207b5fbd722500><5b7fb369b8d321aa2c207b5fbd722500>]
+=======
+[<72bb3d81482c523fe4c4a9cc8a2cace9><72bb3d81482c523fe4c4a9cc8a2cace9>]
+>>>>>>> add86cd73231bfd445188dce7d4b6c2f454937c8
 % ReportLab generated PDF document -- digest (opensource)
 
 /Info 6 0 R
@@ -70,5 +85,9 @@ trailer
 /Size 9
 >>
 startxref
+<<<<<<< HEAD
 1405
+=======
+1410
+>>>>>>> add86cd73231bfd445188dce7d4b6c2f454937c8
 %%EOF
