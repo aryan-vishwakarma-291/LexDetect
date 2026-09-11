@@ -12,6 +12,7 @@ from datetime import datetime
 import os
 from flask import send_file
 from database import init_db, save_prediction, get_history
+<<<<<<< HEAD
 from database import (
     init_db,
     save_prediction,
@@ -19,6 +20,9 @@ from database import (
     delete_prediction,
     clear_history
 )
+=======
+
+>>>>>>> add86cd73231bfd445188dce7d4b6c2f454937c8
 # Create Flask app FIRST
 app = Flask(__name__) 
 init_db()  # Initialize the database
@@ -111,6 +115,7 @@ def history():
         history=history_data
     )
 
+<<<<<<< HEAD
 @app.route("/delete/<int:prediction_id>")
 def delete(prediction_id):
 
@@ -125,6 +130,8 @@ def clear_history_route():
 
     return redirect("/history")
 
+=======
+>>>>>>> add86cd73231bfd445188dce7d4b6c2f454937c8
 @app.route("/", methods=["GET", "POST"])
 def home():
 
