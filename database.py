@@ -65,7 +65,7 @@ def get_history():
 
     conn.close()
 
-<<<<<<< HEAD
+
     return rows
 
 def delete_prediction(prediction_id):
@@ -94,6 +94,6 @@ def clear_history():
     conn.commit()
 
     conn.close()
-=======
+
     return rows
->>>>>>> add86cd73231bfd445188dce7d4b6c2f454937c8
+
